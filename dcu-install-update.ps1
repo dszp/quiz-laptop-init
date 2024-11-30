@@ -14,7 +14,13 @@ Get-DCUVersion
 Invoke-DCU -reboot 'Enable' -scan
 
 if($Install) {
-    Invoke-DCU -reboot 'Enable' -applyUpdates
+    if((Invoke-DCU -reboot 'Enable' -applyUpdates) -eq 0) {
+        Write-Host "`n`nUpdates successful, no reboot required."
+    } else {
+        Write-Host "`n`nUpdates successful, reboot required, so rebooting in 5 seconds."
+        Start-Sleep -Seconds 5
+        Restart-Computer -Force
+    } 
 } else {
     Write-Host "`n`nRe-run script with -Install flag to install available updates after scan."
 }
