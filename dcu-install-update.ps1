@@ -2,7 +2,17 @@
 
 ## SOURCE: https://garytown.com/dell-command-update-install-manage-via-powershell
 
+[CmdletBinding()]
+param(
+    [switch] $Install
+)
+
 iex (irm dell.garytown.com)
 Install-DCU
+Get-DCUVersion
+
 Invoke-DCU -reboot 'Enable' -scan
-# Invoke-DCU -reboot 'Enable' -applyUpdates
+
+if($Install) {
+    Invoke-DCU -reboot 'Enable' -applyUpdates
+}
