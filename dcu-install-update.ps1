@@ -11,8 +11,6 @@ iex (irm dell.garytown.com)
 Install-DCU
 Get-DCUVersion
 
-Invoke-DCU -reboot 'Enable' -scan
-
 if($Install) {
     $DCU_ExitCode = Invoke-DCU -reboot 'Enable' -applyUpdates 
     if($DCU_ExitCode -eq 0) {
@@ -25,5 +23,6 @@ if($Install) {
         Restart-Computer -Force
     } 
 } else {
+    Invoke-DCU -reboot 'Enable' -scan
     Write-Host "`n`nRe-run script with -Install flag to install available updates after scan."
 }
