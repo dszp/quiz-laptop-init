@@ -16,5 +16,5 @@ Invoke-DCU -reboot 'Enable' -scan
 if($Install) {
     Invoke-DCU -reboot 'Enable' -applyUpdates
 } else {
-    Write-Host "Re-run script with -Install flag to install available updates after scan."
+    Write-Host "`n`nRe-run script with -Install flag to install available updates after scan."
 }
