@@ -14,9 +14,12 @@ Get-DCUVersion
 Invoke-DCU -reboot 'Enable' -scan
 
 if($Install) {
-    if((Invoke-DCU -reboot 'Enable' -applyUpdates) -eq 0) {
+    $DCU_ExitCode = Invoke-DCU -reboot 'Enable' -applyUpdates 
+    if($DCU_ExitCode -eq 0) {
         Write-Host "`n`nUpdates successful, no reboot required."
-    } else {
+    } elseif ($DCU_ExitCode -eq 500) {
+        Write-Host "`n`nNo updates available to install, quitting." 
+    } else { 
         Write-Host "`n`nUpdates successful, reboot required, so rebooting in 5 seconds."
         Start-Sleep -Seconds 5
         Restart-Computer -Force
