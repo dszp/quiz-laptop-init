@@ -2,3 +2,4 @@
 
 & Set-Execution-Policy -ExecutionPolicy Unrestricted
 iex (irm "https://raw.githubusercontent.com/dszp/quiz-laptop-init/refs/heads/main/system-prep.ps1")
+
