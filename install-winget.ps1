@@ -4,6 +4,11 @@
 
 # Uncomment to install Dell Command Update via WinGet:
 # winget install -e --id Dell.CommandUpdate --accept-package-agreements --accept-source-agreements --silent
+winget install -e --id Git.Git --accept-package-agreements --accept-source-agreements --silent
 
-# Upgrade all installed apps with WinGet:
-winget upgrade --all --accept-package-agreements --silent --include-pinned
+# Reload path after install:
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+mkdir ~/quizsetup
+cd ~/quizsetup
+git clone https://github.com/dszp/quiz-laptop-init.git .
