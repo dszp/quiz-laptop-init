@@ -29,7 +29,7 @@ git clone 'https://github.com/dszp/quiz-laptop-init.git' .
 Unblock-File *.ps1
 
 # Harden Windows Registry
-powershell "& iex (irm 'https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Harden-Security-Windows-Registry.ps1' -Verbose:$false)"
+powershell "&([ScriptBlock]::Create((irm 'https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Harden-Security-Windows-Registry.ps1' -Verbose:$false)))"
 
 # Disable PowerShell 2 for security
-powershell "& iex (irm 'https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Disable-PowerShell-V2.ps1')"
+powershell "&([ScriptBlock]::Create((irm 'https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Disable-PowerShell-V2.ps1')))"
