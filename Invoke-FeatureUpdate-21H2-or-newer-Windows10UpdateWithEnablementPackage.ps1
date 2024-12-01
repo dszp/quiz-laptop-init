@@ -14,8 +14,18 @@
 #       - Fixed - Removed UBR 1237 requirement for non-enablement that was causing script to fail on 18362.1856
 #   1.0 - 2022-12-08 - Initial release
  
+[CmdletBinding()]
+param(
+    [switch] $23H2
+)
+
 # Target version (if you want to update to a version other than latest also set $AttemptWin1xUpdateAssistant to $false)
 $Win10TargetVersion = "22H2"
+
+# Override target version if parameter switch -23H2 is used
+if($23H2) {
+    $Win10TargetVersion = "23H2"
+}
  
 # Reboot after upgrade (if changing this to $false also set $AttemptWin1xUpdateAssistant to $false)
 $Reboot = $true
