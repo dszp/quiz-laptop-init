@@ -1,6 +1,7 @@
 #Install-Script winget-install -Force
 #winget-install
-&([ScriptBlock]::Create((irm winget.pro))) -Force
+# SOURCE: https://github.com/asheroto/winget-install
+powershell "&([ScriptBlock]::Create((irm winget.pro))) -Force"
 
 # Uncomment to install Dell Command Update via WinGet:
 # winget install -e --id Dell.CommandUpdate --accept-package-agreements --accept-source-agreements --silent
