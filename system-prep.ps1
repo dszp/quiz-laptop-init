@@ -18,6 +18,7 @@ winget install -e --id Git.Git --accept-package-agreements --accept-source-agree
 if((Get-CimInstance -ClassName Win32_OperatingSystem).Manufacturer -like "*Dell*") {
     winget install -e --id Dell.CommandUpdate --accept-package-agreements --accept-source-agreements --silent
 }
+winget install -e --id Microsoft.WindowsTerminal --accept-package-agreements --accept-source-agreements --silent
 
 Write-Host "Reloading system path after install to make new apps available..."
 # Reload path after install:
