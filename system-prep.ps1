@@ -18,9 +18,12 @@ winget install -e --id Git.Git --accept-package-agreements --accept-source-agree
 # Reload path after install:
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
-mkdir ~/quizsetup
-cd ~/quizsetup
-git clone https://github.com/dszp/quiz-laptop-init.git .
+if(!(Test-Path -Path "~\quizsetup")) {
+    Write-Host "Creating quizsetup directory..."
+    New-Item -Path "~\quizsetup" -ItemType Directory
+}
+Change-Directory -Path "~\quizsetup"
+git clone 'https://github.com/dszp/quiz-laptop-init.git' .
 
 # Run in an Administrative PowerShell prompt manually against a specific file, this unblocks downloaded files to execute:
 Unblock-File *.ps1
