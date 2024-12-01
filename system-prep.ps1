@@ -24,7 +24,7 @@ Write-Host "Reloading system path after install to make new apps available..."
 # Reload path after install:
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
-Write-Host "Creating $($env:USERPROFILE\quizsetup) directory and cloning quiz-laptop-init repository with git..." -ForegroundColor Green
+Write-Host "Creating $($env:USERPROFILE)\quizsetup directory and cloning quiz-laptop-init repository with git..." -ForegroundColor Green
 if(!(Test-Path -Path "~\quizsetup")) {
     Write-Host "Creating quizsetup directory because it doesn't exist yet..."
     New-Item -Path "~\quizsetup" -ItemType Directory
