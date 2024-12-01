@@ -28,8 +28,10 @@ git clone 'https://github.com/dszp/quiz-laptop-init.git' .
 # Run in an Administrative PowerShell prompt manually against a specific file, this unblocks downloaded files to execute:
 Unblock-File *.ps1
 
-# Harden Windows Registry
-powershell "&([ScriptBlock]::Create((irm https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Harden-Security-Windows-Registry.ps1 -Verbose:$false)))"
+Write-Host "Run the scripts starting with 2-harden-windows.ps1 and so forth, some multiple times if needed." -ForegroundColor Green
 
-# Disable PowerShell 2 for security
-powershell "&([ScriptBlock]::Create((irm https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Disable-PowerShell-V2.ps1)))"
+# # Harden Windows Registry
+# powershell "&([ScriptBlock]::Create((irm https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Harden-Security-Windows-Registry.ps1 -Verbose:$false)))"
+
+# # Disable PowerShell 2 for security
+# powershell "&([ScriptBlock]::Create((irm https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Disable-PowerShell-V2.ps1)))"
