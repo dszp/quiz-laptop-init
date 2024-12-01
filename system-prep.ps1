@@ -22,14 +22,14 @@ if(!(Test-Path -Path "~\quizsetup")) {
     Write-Host "Creating quizsetup directory..."
     New-Item -Path "~\quizsetup" -ItemType Directory
 }
-Change-Directory -Path "~\quizsetup"
+Set-Location -Path "~\quizsetup"
 git clone 'https://github.com/dszp/quiz-laptop-init.git' .
 
 # Run in an Administrative PowerShell prompt manually against a specific file, this unblocks downloaded files to execute:
 Unblock-File *.ps1
 
 # Harden Windows Registry
-powershell "&([ScriptBlock]::Create((irm 'https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Harden-Security-Windows-Registry.ps1' -Verbose:$false)))"
+powershell "&([ScriptBlock]::Create((irm https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Harden-Security-Windows-Registry.ps1 -Verbose:$false)))"
 
 # Disable PowerShell 2 for security
-powershell "&([ScriptBlock]::Create((irm 'https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Disable-PowerShell-V2.ps1')))"
+powershell "&([ScriptBlock]::Create((irm https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Disable-PowerShell-V2.ps1)))"
