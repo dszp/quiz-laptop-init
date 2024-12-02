@@ -63,10 +63,10 @@ Set-Location -Path "$($env:USERPROFILE)\quizsetup"
 
 # Check if the current folder is a git repository
 if (Test-Path -Path ".git" -PathType Container) {
-    Write-Host "This is a git repository. Performing git pull to refresh source scripts..."
+    Write-Host "This directory is already a git repository. Performing git pull to refresh source scripts..."
     git pull
 } else {
-    Write-Host "This is not a git repository yet. Cloning from $github_repo_url..."
+    Write-Host "This directory is not yet a git repository. Cloning from $github_repo_url..."
     git clone $github_repo_url .
 }
 
