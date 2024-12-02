@@ -40,16 +40,13 @@ Write-Host "The security hardening and Dell Command Update (if Dell computer) ar
 Write-Host "Only run the appropriate Windows Feature Update script if not yet at Windows Pro 22H2 or later in the System properties."
 Write-Host "To update to the latest setup file, while in this directory type: git pull"
 
-Write-Host "`nThe following documentation file for reference are in the $($env:USERPROFILE)\quizsetup directory:" -ForegroundColor Green
-Get-ChildItem -Path "." -Filter "*.md" | Select-Object -Property Name # | Where-Object{ $_.Name -match ".*\.md$" }
+Write-Host "`nThe following documentation file for reference are in the $($env:USERPROFILE)\quizsetup directory:`n" -ForegroundColor Green
+Get-ChildItem -Filter *.md | ForEach-Object { Write-Host $_.Name }
 
-Write-Host "`nThe following script are in the $($env:USERPROFILE)\quizsetup directory:" -ForegroundColor Green
-Get-ChildItem -Path "." -Filter "*.ps1" | Select-Object -Property Name | Where-Object{ $_.Name -match "[0-9]-.*\.ps1$" }
+Write-Host "`nThe following script are in the $($env:USERPROFILE)\quizsetup directory:`n" -ForegroundColor Green
+Get-ChildItem -Filter *.ps1 | 
+    Where-Object { $_.Name -notlike 'INACTIVE*' } | 
+    Sort-Object Name | 
+    ForEach-Object { Write-Host $_.Name }
 
 Write-Host "`nRun the scripts starting with 2-harden-windows.ps1 and so forth, some multiple times if needed." -ForegroundColor Green
-
-# # Harden Windows Registry
-# powershell "&([ScriptBlock]::Create((irm https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Harden-Security-Windows-Registry.ps1 -Verbose:$false)))"
-
-# # Disable PowerShell 2 for security
-# powershell "&([ScriptBlock]::Create((irm https://raw.githubusercontent.com/dszp/MSP-Scripts/refs/heads/main/Windows-Security-Hardening/Disable-PowerShell-V2.ps1)))"
