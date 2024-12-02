@@ -12,6 +12,8 @@ See the "1-manual-bootstrap-commands.ps1" script for how to run this script by c
 Administrative PowerShell prompt.
 #>
 
+$github_repo_url = "https://github.com/dszp/quiz-laptop-init.git"
+
 function Test-IsElevated {
     $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
     $p = New-Object System.Security.Principal.WindowsPrincipal($id)
@@ -50,12 +52,23 @@ Write-Host "Reloading system path after install to make new apps available..."
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 Write-Host "Creating $($env:USERPROFILE)\quizsetup directory and cloning quiz-laptop-init repository with git..." -ForegroundColor Green
-if(!(Test-Path -Path "~\quizsetup")) {
+if(!(Test-Path -Path "$($env:USERPROFILE)\quizsetup" -ErrorAction SilentlyContinue)) {
     Write-Host "Creating quizsetup directory because it doesn't exist yet..."
-    New-Item -Path "~\quizsetup" -ItemType Directory
+    New-Item -Path "$($env:USERPROFILE)\quizsetup" -ItemType Directory
 }
-Set-Location -Path "~\quizsetup"
-git clone 'https://github.com/dszp/quiz-laptop-init.git' .
+Set-Location -Path "$($env:USERPROFILE)\quizsetup"
+
+# Clone the repository
+# git clone $($github_repo_url).git .
+
+# Check if the current folder is a git repository
+if (Test-Path -Path ".git" -PathType Container) {
+    Write-Host "This is a git repository. Performing git pull to refresh source scripts..."
+    git pull
+} else {
+    Write-Host "This is not a git repository yet. Cloning from $github_repo_url..."
+    git clone $github_repo_url .
+}
 
 # Run in an Administrative PowerShell prompt manually against a specific file, this unblocks downloaded files to execute:
 Unblock-File *.ps1
