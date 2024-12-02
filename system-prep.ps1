@@ -68,13 +68,13 @@ function Initial-Setup-Install-Clone {
     #Install-Script winget-install -Force
     #winget-install
     Write-Host "Installing WinGet via Add-AppxPackage first..."
-    Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe -Force
+    Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
 
-    if(!Get-WingetStatus) {
+    if(!(Get-WingetStatus)) {
         Write-Host "Installing WinGet via winget-install.ps1 because Add-AppxPackage failed..." -ForegroundColor Yellow
         powershell "&([ScriptBlock]::Create((irm winget.pro))) -Force"
     }
-    if(!Get-WingetStatus) {
+    if(!(Get-WingetStatus)) {
         Write-Host "Unable to install WinGet via multiple methods, please resolve manually. Exiting..." -ForegroundColor Red
         exit 1
     }
