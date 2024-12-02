@@ -80,7 +80,7 @@ function Complete-Setup-And-Help {
     # Run in an Administrative PowerShell prompt manually against a specific file, this unblocks downloaded files to execute:
     Unblock-File *.ps1
 
-    Write-Host "To return to this directory in an Administrative PowerShell window in the future, type: cd ~\quizsetup"
+    Write-Host "To return to this directory in an Administrative PowerShell window in the future, type: cd ~\quizsetup" -ForegroundColor Yellow
     Write-Host "The security hardening and Dell Command Update (if Dell computer) are the next important scripts to run."
     Write-Host "Only run the appropriate Windows Feature Update script if not yet at Windows Pro 22H2 or later in the System properties."
     Write-Host "To update to the latest setup file, while in this directory type: git pull"
