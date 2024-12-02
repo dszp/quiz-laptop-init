@@ -19,7 +19,8 @@ if(!(Test-IsElevated)) {
 }
 
 iex (irm dell.garytown.com)
-Install-DCU
+# The install function doesn't work, but WinGet is used to install Dell CommandUpdate from system-prep.ps1.
+# Install-DCU
 Get-DCUVersion
 
 if($Install) {
