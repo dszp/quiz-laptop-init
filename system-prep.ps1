@@ -47,7 +47,7 @@ function Initial-Setup-Install-Clone {
     Write-Host "Installing Git and Dell Command Update if applicable..."
 
     winget install -e --id Git.Git --accept-package-agreements --accept-source-agreements --silent
-    if((Get-CimInstance -ClassName Win32_OperatingSystem).Manufacturer -like "*Dell*") {
+    if((Get-CimInstance -Query 'Select * from Win32_BIOS').Manufacturer -like "*Dell*") {
         winget install -e --id Dell.CommandUpdate --accept-package-agreements --accept-source-agreements --silent
     }
     winget install -e --id Microsoft.WindowsTerminal --accept-package-agreements --accept-source-agreements --silent
