@@ -25,7 +25,7 @@ Get-DCUVersion
 
 if(!$Scan) {
     Write-Host "`n`nScanning for Dell updates and installing any it finds. Will automatically reboot if necessary." -ForegroundColor Yellow
-    Write-Host "`n`n(Run this script with -Scan flag to show but not install available updates after scan.)"
+    Write-Host "(Run this script with -Scan flag to show but not install available updates after scan.)"
     $DCU_ExitCode = Invoke-DCU -reboot 'Enable' -applyUpdates 
     if($DCU_ExitCode -eq 0) {
         Write-Host "`n`nUpdates successful, no reboot required."

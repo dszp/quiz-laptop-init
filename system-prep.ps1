@@ -11,8 +11,10 @@ this script runs.
 See the "1-manual-bootstrap-commands.ps1" script for how to run this script by copying and pasting the URL to the script into an 
 Administrative PowerShell prompt.
 #>
+# -Help and -Update switches are equivalent
 [CmdletBinding()]
 param(
+    [switch] $Update,
     [switch] $Help
 )
 
@@ -97,7 +99,7 @@ function Complete-Setup-And-Help {
     Write-Host "`nRun the scripts starting with 2-harden-windows.ps1 and so forth, some multiple times if needed." -ForegroundColor Green
 }
 
-if(!$Help) {
+if(!$Help -and !$Update) {
     Initial-Setup-Install-Clone
 }
 Complete-Setup-And-Help
