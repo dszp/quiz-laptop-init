@@ -31,6 +31,30 @@ if(!(Test-IsElevated)) {
     exit 1
 }
 
+function Get-WingetStatus {
+    <#
+        .SYNOPSIS
+        Checks if winget is installed.
+
+        .DESCRIPTION
+        This function checks if winget is installed.
+
+        .EXAMPLE
+        Get-WingetStatus
+    #>
+
+    # Check if winget is installed
+    $winget = Get-Command -Name winget -ErrorAction SilentlyContinue
+
+    # If winget is installed, return $true
+    if ($null -ne $winget -and $winget -notlike '*failed to run*') {
+        return $true
+    }
+
+    # If winget is not installed, return $false
+    return $false
+}
+
 function Initial-Setup-Install-Clone {
     # Disable Fastboot
     Write-Host "Disabling FastBoot via registry key..."
@@ -43,8 +67,18 @@ function Initial-Setup-Install-Clone {
 
     #Install-Script winget-install -Force
     #winget-install
-    Write-Host "Installing WinGet"
-    powershell "&([ScriptBlock]::Create((irm winget.pro))) -Force"
+    Write-Host "Installing WinGet via Add-AppxPackage first..."
+    Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe -Force
+
+    if(!Get-WingetStatus) {
+        Write-Host "Installing WinGet via winget-install.ps1 because Add-AppxPackage failed..." -ForegroundColor Yellow
+        powershell "&([ScriptBlock]::Create((irm winget.pro))) -Force"
+    }
+    if(!Get-WingetStatus) {
+        Write-Host "Unable to install WinGet via multiple methods, please resolve manually. Exiting..." -ForegroundColor Red
+        exit 1
+    }
+    
 
     Write-Host "Installing Git and Dell Command Update if applicable..."
 
