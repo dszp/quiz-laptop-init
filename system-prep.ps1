@@ -1,3 +1,28 @@
+<# system-prep.ps1
+ABOUT: Prepares a Windows 10 computer with a fresh Windows installation to run several scripts for updating and Windows hardening to 
+prepare a Windows 10 computer for running QuizMachine. Installs the WinGet Microsoft Windows Package Manager first. Uses that to 
+install Dell CommandUpdate if computer is Dell, and installs Windows Terminal. 
+Installs Git and creates a ~\quizsetup directory and clones the quiz-laptop-init repository into it to provide additional scripts 
+to run locally to finish the setup process.
+The .md files in the repository (and folder) are listed, they contain help information. Then the .ps1 files in the repository are 
+listed, unless they start with INACTIVE which means they're for reference or a work-in-progress. See directions and output after 
+this script runs.
+
+See the "1-manual-bootstrap-commands.ps1" script for how to run this script by copying and pasting the URL to the script into an 
+Administrative PowerShell prompt.
+#>
+
+function Test-IsElevated {
+    $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+    $p = New-Object System.Security.Principal.WindowsPrincipal($id)
+    $p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+if(!(Test-IsElevated)) {
+    Write-Host "This script needs to be run with elevated permissions, from an Administrative PowerShell prompt. Exiting..."
+    exit 1
+}
+
 # Disable Fastboot
 Write-Host "Disabling FastBoot via registry key..."
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d "0" /f

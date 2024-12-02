@@ -7,6 +7,17 @@ param(
     [switch] $Install
 )
 
+function Test-IsElevated {
+    $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+    $p = New-Object System.Security.Principal.WindowsPrincipal($id)
+    $p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+if(!(Test-IsElevated)) {
+    Write-Host "This script needs to be run with elevated permissions, from an Administrative PowerShell prompt. Exiting..."
+    exit 1
+}
+
 iex (irm dell.garytown.com)
 Install-DCU
 Get-DCUVersion
