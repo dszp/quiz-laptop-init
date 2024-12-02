@@ -77,6 +77,8 @@ function Initial-Setup-Install-Clone {
     if(!(Get-WingetStatus)) {
         Write-Host "Unable to install WinGet via multiple methods, please resolve manually. Exiting..." -ForegroundColor Red
         exit 1
+    } else {
+        Write-Host "WinGet is installed successfully, continuing..."
     }
     
 
