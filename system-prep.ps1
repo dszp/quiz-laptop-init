@@ -19,7 +19,7 @@ function Test-IsElevated {
 }
 
 if(!(Test-IsElevated)) {
-    Write-Host "This script needs to be run with elevated permissions, from an Administrative PowerShell prompt. Exiting..."
+    Write-Host "This script needs to be run with elevated permissions, from an Administrative PowerShell prompt. Exiting..." -ForegroundColor Red
     exit 1
 }
 
