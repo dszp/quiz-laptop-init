@@ -28,7 +28,7 @@ if ($exeFiles.Count -eq 0) {
         $QM_installer = $exeFiles[$choice - 1].Name
         Write-Host "You selected: $QM_installer`n" -ForegroundColor Green
     } else {
-        Write-Error "Invalid choice. Exiting." -ForegroundColor Red
+        Write-Host "Invalid choice. Exiting." -ForegroundColor Red
         exit 1
     }
 } else {
