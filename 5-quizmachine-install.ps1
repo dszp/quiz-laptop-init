@@ -21,7 +21,7 @@ if ($exeFiles.Count -eq 0) {
     }
 
     # Prompt the user to choose a file
-    $choice = Read-Host "`nEnter the number of the installer to run"
+    $choice = Read-Host "`nEnter the number of the installer to run (anything else to cancel)"
 
     # Validate the choice
     if ($choice -gt 0 -and $choice -le $exeFiles.Count) {
