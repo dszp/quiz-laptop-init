@@ -15,13 +15,13 @@ if ($exeFiles.Count -eq 0) {
     $exeFiles = $exeFiles | Sort-Object Name
 
     # List the .exe files with numbered prefixes
-    Write-Host "Multiple potential installer files found, please select one by number:"
+    Write-Host "Multiple potential installer files found, please select one by number:`n" -ForegroundColor Yellow
     for ($i = 0; $i -lt $exeFiles.Count; $i++) {
         Write-Host "$($i + 1). $($exeFiles[$i].Name)"
     }
 
     # Prompt the user to choose a file
-    $choice = Read-Host "`nEnter the number of the installer to run" -ForegroundColor Green
+    $choice = Read-Host "`nEnter the number of the installer to run"
 
     # Validate the choice
     if ($choice -gt 0 -and $choice -le $exeFiles.Count) {
