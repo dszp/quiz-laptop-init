@@ -38,5 +38,7 @@ if ($exeFiles.Count -eq 0) {
 }
 Write-Host "Silently installing the $QM_installer installation, please wait..."
 
+Write-Host "When "QuizMachine Installed" prompt appears (may be behind window), click OK to finish." -ForegroundColor Yellow
+
 Start-Process ".\$QM_installer" -ArgumentList "/S" -Wait
 
