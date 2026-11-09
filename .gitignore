@@ -1,2 +1,6 @@
 # Ignore .exe files so installers are never downloaded or overwritten with an update.
 *.exe
+
+# Claude Code per-user files: they can hold tokens copied from approved commands
+**/.claude/settings.local.json
+**/CLAUDE.local.md
